@@ -1,0 +1,45 @@
+// This is your Prisma schema file,
+// learn more about it in the docs: https://pris.ly/d/prisma-schema
+
+// Looking for ways to speed up your queries, or scale easily with your serverless or edge functions?
+// Try Prisma Accelerate: https://pris.ly/cli/accelerate-init
+
+generator client {
+  provider = "prisma-client-js"
+//  output   = "../generated/prisma"
+}
+
+datasource db {
+  provider = "postgresql"
+  url      = env("DATABASE_URL")
+}
+
+model User {
+  id              String           @id @default(cuid())
+  nombre          String
+  email           String?          @unique
+  createdAt       DateTime         @default(now())
+  updatedAt       DateTime         @updatedAt
+  smartContracts  SmartContract[]
+}
+
+model SmartContract {
+  id              String     @id @default(cuid())
+  nombre          String     // Ej: "certificado"
+  address         String     @unique // Dirección del contrato en la blockchain
+  network         String     @default("metis") // Red: metis, ethereum, polygon...
+  environment     String     @default("mainnet") // mainnet, testnet, staging...
+  rpcUrl          String     // RPC específico para este contrato
+  description     String?
+  isDefault       Boolean    @default(false) // Si es el contrato por defecto para ese cliente/entorno
+  createdAt       DateTime   @default(now())
+  updatedAt       DateTime   @updatedAt
+
+  userId          String
+  user            User       @relation(fields: [userId], references: [id])
+
+  @@index([userId])
+  @@index([nombre])
+  @@index([network])
+  @@index([environment])
+}

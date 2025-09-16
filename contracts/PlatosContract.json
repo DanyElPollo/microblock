@@ -1,0 +1,320 @@
+[ 
+    {
+      "anonymous": false,
+      "inputs": [
+        {
+          "indexed": false,
+          "internalType": "string",
+          "name": "idPlato",
+          "type": "string"
+        },
+        {
+          "indexed": false,
+          "internalType": "string",
+          "name": "nombrePlato",
+          "type": "string"
+        },
+        {
+          "indexed": false,
+          "internalType": "string",
+          "name": "idEmpresa",
+          "type": "string"
+        }
+      ],
+      "name": "PlatoRegistrado",
+      "type": "event"
+    },
+    {
+      "inputs": [
+        {
+          "internalType": "string",
+          "name": "_idPlato",
+          "type": "string"
+        },
+        {
+          "internalType": "string",
+          "name": "_nombrePlato",
+          "type": "string"
+        },
+        {
+          "internalType": "string",
+          "name": "_idEmpresa",
+          "type": "string"
+        },
+        {
+          "components": [
+            {
+              "internalType": "string",
+              "name": "nombre",
+              "type": "string"
+            },
+            {
+              "internalType": "string",
+              "name": "macronutrientes",
+              "type": "string"
+            },
+            {
+              "internalType": "string",
+              "name": "micronutrientes",
+              "type": "string"
+            },
+            {
+              "internalType": "string",
+              "name": "nutrientes",
+              "type": "string"
+            },
+            {
+              "internalType": "string",
+              "name": "grasas",
+              "type": "string"
+            },
+            {
+              "internalType": "string",
+              "name": "otros",
+              "type": "string"
+            }
+          ],
+          "internalType": "struct PlatosContract.NutrientesCodificados",
+          "name": "_nutrientes",
+          "type": "tuple"
+        },
+        {
+          "internalType": "string",
+          "name": "_keyword",
+          "type": "string"
+        }
+      ],
+      "name": "agregarPlato",
+      "outputs": [],
+      "stateMutability": "nonpayable",
+      "type": "function"
+    },
+    {
+      "inputs": [
+        {
+          "internalType": "string",
+          "name": "_idPlato",
+          "type": "string"
+        }
+      ],
+      "name": "obtenerPlatoPorId",
+      "outputs": [
+        {
+          "components": [
+            {
+              "internalType": "string",
+              "name": "idPlato",
+              "type": "string"
+            },
+            {
+              "internalType": "string",
+              "name": "nombrePlato",
+              "type": "string"
+            },
+            {
+              "internalType": "string",
+              "name": "idEmpresa",
+              "type": "string"
+            },
+            {
+              "components": [
+                {
+                  "internalType": "string",
+                  "name": "nombre",
+                  "type": "string"
+                },
+                {
+                  "internalType": "string",
+                  "name": "macronutrientes",
+                  "type": "string"
+                },
+                {
+                  "internalType": "string",
+                  "name": "micronutrientes",
+                  "type": "string"
+                },
+                {
+                  "internalType": "string",
+                  "name": "nutrientes",
+                  "type": "string"
+                },
+                {
+                  "internalType": "string",
+                  "name": "grasas",
+                  "type": "string"
+                },
+                {
+                  "internalType": "string",
+                  "name": "otros",
+                  "type": "string"
+                }
+              ],
+              "internalType": "struct PlatosContract.NutrientesCodificados",
+              "name": "nutrientes",
+              "type": "tuple"
+            },
+            {
+              "internalType": "string",
+              "name": "keyword",
+              "type": "string"
+            }
+          ],
+          "internalType": "struct PlatosContract.Plato",
+          "name": "",
+          "type": "tuple"
+        }
+      ],
+      "stateMutability": "view",
+      "type": "function"
+    },
+    {
+      "inputs": [
+        {
+          "internalType": "string",
+          "name": "_idEmpresa",
+          "type": "string"
+        }
+      ],
+      "name": "obtenerPlatosPorEmpresa",
+      "outputs": [
+        {
+          "components": [
+            {
+              "internalType": "string",
+              "name": "idPlato",
+              "type": "string"
+            },
+            {
+              "internalType": "string",
+              "name": "nombrePlato",
+              "type": "string"
+            },
+            {
+              "internalType": "string",
+              "name": "idEmpresa",
+              "type": "string"
+            },
+            {
+              "components": [
+                {
+                  "internalType": "string",
+                  "name": "nombre",
+                  "type": "string"
+                },
+                {
+                  "internalType": "string",
+                  "name": "macronutrientes",
+                  "type": "string"
+                },
+                {
+                  "internalType": "string",
+                  "name": "micronutrientes",
+                  "type": "string"
+                },
+                {
+                  "internalType": "string",
+                  "name": "nutrientes",
+                  "type": "string"
+                },
+                {
+                  "internalType": "string",
+                  "name": "grasas",
+                  "type": "string"
+                },
+                {
+                  "internalType": "string",
+                  "name": "otros",
+                  "type": "string"
+                }
+              ],
+              "internalType": "struct PlatosContract.NutrientesCodificados",
+              "name": "nutrientes",
+              "type": "tuple"
+            },
+            {
+              "internalType": "string",
+              "name": "keyword",
+              "type": "string"
+            }
+          ],
+          "internalType": "struct PlatosContract.Plato[]",
+          "name": "",
+          "type": "tuple[]"
+        }
+      ],
+      "stateMutability": "view",
+      "type": "function"
+    },
+    {
+      "inputs": [],
+      "name": "obtenerTodosLosPlatos",
+      "outputs": [
+        {
+          "components": [
+            {
+              "internalType": "string",
+              "name": "idPlato",
+              "type": "string"
+            },
+            {
+              "internalType": "string",
+              "name": "nombrePlato",
+              "type": "string"
+            },
+            {
+              "internalType": "string",
+              "name": "idEmpresa",
+              "type": "string"
+            },
+            {
+              "components": [
+                {
+                  "internalType": "string",
+                  "name": "nombre",
+                  "type": "string"
+                },
+                {
+                  "internalType": "string",
+                  "name": "macronutrientes",
+                  "type": "string"
+                },
+                {
+                  "internalType": "string",
+                  "name": "micronutrientes",
+                  "type": "string"
+                },
+                {
+                  "internalType": "string",
+                  "name": "nutrientes",
+                  "type": "string"
+                },
+                {
+                  "internalType": "string",
+                  "name": "grasas",
+                  "type": "string"
+                },
+                {
+                  "internalType": "string",
+                  "name": "otros",
+                  "type": "string"
+                }
+              ],
+              "internalType": "struct PlatosContract.NutrientesCodificados",
+              "name": "nutrientes",
+              "type": "tuple"
+            },
+            {
+              "internalType": "string",
+              "name": "keyword",
+              "type": "string"
+            }
+          ],
+          "internalType": "struct PlatosContract.Plato[]",
+          "name": "",
+          "type": "tuple[]"
+        }
+      ],
+      "stateMutability": "view",
+      "type": "function"
+    }
+  ]
