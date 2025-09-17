@@ -1,16 +1,16 @@
 import { Injectable } from '@nestjs/common';
 import { Buffer } from 'buffer';
-import ABI from '../../contracts/PlatosContract.json'
+import ABI from '../../contracts/PlatosContract.json';
 import { AgregarPlatoDto } from './dto/publicar.dto';
 import { ConnectorService } from './connector/connector.service';
 import { ConfigService } from '@nestjs/config';
-import { identity } from 'rxjs';
+import { mapPlatosFromArray, mapPlatoFromArray } from "./mappers/plato.mapper"
 
 @Injectable()
 export class BlockchainService {
-  private readonly rpcUrl: string
-  private readonly contractAddress: string
-  private readonly abi = ABI
+  private readonly rpcUrl: string;
+  private readonly contractAddress: string;
+  private readonly abi = ABI;
 
   constructor(private readonly connector: ConnectorService, private readonly config: ConfigService) {
     const rpc = this.config.get<string>('config.rpc');
@@ -37,31 +37,29 @@ export class BlockchainService {
     }
   }
 
+  //todos los platos
   async getDataBlockchain() {
     try {
       const contract = await this.conn(false);
-
       const platos = await contract.obtenerTodosLosPlatos();
-
-      const platosDecodificados = this.decodificarNutrientes(platos);
-      return platosDecodificados;
+      return mapPlatosFromArray(platos);
     } catch (e) {
       throw new Error('❌ Error al conectar con el contrato: ' + e);
     }
   }
 
-  async getDataBlockchainById(id: string): Promise<any[]> {
+  //plato por id
+  async getDataBlockchainById(id: string): Promise<AgregarPlatoDto> {
     try {
-      const contract = await this.conn(true);
-
+      const contract = await this.conn(false);
       const plato = await contract.obtenerPlatoPorId(id);
-      return this.decodificarNutrientes(plato)
+      return mapPlatoFromArray(plato);
     } catch (e) {
       throw new Error('❌ Error al conectar con el contrato: ' + e);
     }
   }
 
-
+  //publicar plato
   async publicDataBlockchain(dto: AgregarPlatoDto) {
     const contract = await this.conn(true);
 
@@ -89,61 +87,5 @@ export class BlockchainService {
     };
   }
 
-  //funciones escenciales para el trabajo de decodificacion
-  private esBase64(str: string): boolean {
-    return /^[A-Za-z0-9+/=]{10,}$/.test(str) && str.length % 4 === 0;
-  }
 
-  private decodificarNutrientes(platos: any[]): any[] {
-    return platos.map(plato => {
-      const nutrientes = plato.nutrientes;
-
-      if (!nutrientes || typeof nutrientes !== 'object') return plato;
-
-      const nutrientesDecodificados = Object.fromEntries(
-        Object.entries(nutrientes).map(([key, value]) => {
-          if (typeof value !== 'string') return [key, value];
-
-          if (this.esBase64(value)) {
-            try {
-              const decoded = Buffer.from(value, 'base64').toString('utf8');
-              return [key, decoded];
-            } catch {
-              return [key, value];
-            }
-          }
-
-          return [key, value];
-        })
-      );
-
-      return {
-        ...plato,
-        nutrientes: nutrientesDecodificados
-      };
-    });
-  }
-
-  private deconutri(nutrientes: any[]): any[] {
-    return nutrientes.map((nutriente) => {
-      const nutrientesDecodificados = Object.fromEntries(
-        Object.entries(nutriente).map(([key, value]) => {
-          if (typeof value !== 'string') return [key, value];
-
-          if (this.esBase64(value)) {
-            try {
-              const decoded = Buffer.from(value, 'base64').toString('utf8');
-              return [key, decoded];
-            } catch {
-              return [key, value];
-            }
-          }
-
-          return [key, value];
-        })
-
-      )
-    }
-    )
-  }
 }
