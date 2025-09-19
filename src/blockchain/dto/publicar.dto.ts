@@ -31,7 +31,7 @@ export class AgregarPlatoDto {
   @IsString()
   idEmpresa: string;
 
-  @ValidateNested()
+  @ValidateNested({ each: true })
   @Type(() => NutrientesCodificadosDto)
   nutrientes: NutrientesCodificadosDto;
 
