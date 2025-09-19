@@ -14,7 +14,7 @@ export class ConnectorService {
       const privateKey = this.config.get<string>('config.wallet_private_key');
 
       if (!privateKey || typeof privateKey !== 'string') {
-        throw new Error('🔐 Clave privada no definida o inválida en el entorno');
+        throw new Error('Clave privada no definida o inválida');
       }
 
       const signer = useSigner
