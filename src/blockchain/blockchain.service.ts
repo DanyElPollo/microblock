@@ -68,24 +68,31 @@ export class BlockchainService {
       return acc;
     }, {} as Record<string, string>);
 
-    const tx = await contract.agregarPlato(
-      dto.idPlato,
-      dto.nombrePlato,
-      dto.idEmpresa,
-      nutrientesCodificados,
-      dto.keyword
-    );
+    try {
+      const tx = await contract.agregarPlato(
+        dto.idPlato,
+        dto.nombrePlato,
+        dto.idEmpresa,
+        nutrientesCodificados,
+        dto.keyword
+      );
 
-    const receipt = await tx.wait();
+      const receipt = await tx.wait();
 
-    return {
-      status: '✅ Plato agregado',
-      txHash: receipt.transactionHash,
-      block: receipt.blockNumber,
-      keyword: dto.keyword,
-      nutrientesCodificados
-    };
+      return {
+        success: true,
+        status: 'success',
+        message: 'Dish successfully published on blockchain',
+        txHash: receipt.hash,
+        block: receipt.blockNumber
+      };
+    } catch (error) {
+      return {
+        success: false,
+        status: 'error',
+        message: 'Failed to publish dish to blockchain',
+        error: error.reason || error?.message || String(error) || error.receipt
+      };
+    }
   }
-
-
 }
