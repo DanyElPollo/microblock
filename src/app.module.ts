@@ -1,7 +1,7 @@
 import { Module } from '@nestjs/common';
-import { ConfigModule } from '@nestjs/config';
 import { BlockchainModule } from './blockchain/blockchain.module';
-import ConfigurationApp from '../config/ConfigurationApp';
+import { ConfigModule } from '@nestjs/config';
+import ConfigurationApp from 'config/ConfigurationApp';
 
 @Module({
   imports: [
