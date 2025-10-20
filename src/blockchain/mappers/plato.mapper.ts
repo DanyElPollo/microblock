@@ -10,7 +10,6 @@ export function mapPlatoFromArray(data: any[]): AgregarPlatoDto {
     nombrePlato: data[1],
     idEmpresa: data[2],
     nutrientes: deconutri(data[3]),
-    keyword: data[4]
   };
 }
 

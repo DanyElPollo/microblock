@@ -17,8 +17,6 @@ export class NutrientesCodificadosDto {
   @IsString()
   grasas: string;
 
-  @IsString()
-  otros: string;
 }
 
 export class AgregarPlatoDto {
@@ -34,7 +32,4 @@ export class AgregarPlatoDto {
   @ValidateNested({ each: true })
   @Type(() => NutrientesCodificadosDto)
   nutrientes: NutrientesCodificadosDto;
-
-  @IsString()
-  keyword: string;
 }

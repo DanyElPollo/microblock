@@ -27,6 +27,5 @@ export function deconutri(nutrientes: string[]): NutrientesCodificadosDto {
     micronutrientes: decoded[2] || '',
     nutrientes: decoded[3] || '',
     grasas: decoded[4] || '',
-    otros: decoded[5] || ''
   };
 }

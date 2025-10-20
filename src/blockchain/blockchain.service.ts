@@ -74,7 +74,6 @@ export class BlockchainService {
         dto.nombrePlato,
         dto.idEmpresa,
         nutrientesCodificados,
-        dto.keyword
       );
 
       const receipt = await tx.wait();
